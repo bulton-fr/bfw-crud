@@ -75,6 +75,8 @@ class Crud
         if(!is_string($table)) {return false;}
         
         $this->table = $table;
+        $this->sql->setTable($table);
+        
         return $this;
     }
     
