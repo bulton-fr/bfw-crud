@@ -171,7 +171,7 @@ class CrudModeles extends Modeles
         {
             foreach($res as $datas)
             {
-                $columns[] = $datas->Field;
+                $columns[] = $datas['Field'];
             }
             
             return $columns;
@@ -194,14 +194,14 @@ class CrudModeles extends Modeles
         $query = 'SHOW COLUMNS FROM '.$this->_name.' WHERE `Key`="PRI"';
         $req   = $this->query($query);
         
-        try {$res = $req->fetchRow();}
+        try {$res = $req->fetch();}
         catch(Exception $e)
         {
             echo '<pre>'.$e.'</pre><br/><br/>';
             return false;
         }
         
-            if($res) {return $res->Field;}
+            if($res) {return $res['Field'];}
         elseif(!$res && $req->nb_result() === 0) {return false;}
         else
         {

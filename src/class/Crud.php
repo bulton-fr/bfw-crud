@@ -187,7 +187,24 @@ class Crud
             }
         }
         
-        $datas = $this->sql->getDatas($query);
-        return $datas;
+        $datas = $this->sql->getAll($query);
+        $normalizeDatas = array();
+        
+        foreach($datas as $lignes)
+        {
+            $data = array();
+            
+            foreach($lignes as $colName => $value)
+            {
+                $dataLine = $this->columns[$colName];
+                $dataLine['value'] = $value;
+                
+                $data[] = $dataLine;
+            }
+            
+            $normalizeDatas[] = $data;
+        }
+        
+        return $normalizeDatas;
     }
 }
