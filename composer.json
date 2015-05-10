@@ -1,0 +1,31 @@
+{
+	"name": "bulton-fr/bfw-crud",
+	"type": "library",
+	"description": "Permet de créer un crud avec bfw",
+	"keywords": ["crud", "admin", "module", "bfw"],
+	"homepage": "https://github.com/bulton-fr/bfw-crud",
+    "time": "2015-05-10",
+	"license": "LGPL-3.0",
+	"authors":
+	[
+		{
+			"name": "Vermeulen Maxime / Bulton",
+			"homepage": "http://www.bulton.fr",
+			"email": "bulton.fr@bulton.fr"
+		}
+	],
+	"support":
+	{
+		"email": "support@bulton.fr",
+		"issues": "https://github.com/bulton-fr/bfw-crud/issues",
+		"source": "https://github.com/bulton-fr/bfw-crud"
+	},
+	"require":
+	{
+		"php": ">=5.3.0",
+		"bulton-fr/bfw": "~2.1",
+        "bulton-fr/bfw-api": "~1.0",
+        "bulton-fr/bfw-sql" : "~1.0"
+	},
+	"minimum-stability": "stable"
+}
