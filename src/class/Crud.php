@@ -68,14 +68,14 @@ class Crud
      * 
      * @param string $table : Le nom de la table
      * 
-     * @return bool
+     * @return bool|Crud
      */
     public function setTable($table)
     {
         if(!is_string($table)) {return false;}
         
         $this->table = $table;
-        return true;
+        return $this;
     }
     
     /**
@@ -86,7 +86,7 @@ class Crud
      * @param string $tableRight
      * @param string $colJoinRight
      * 
-     * @return void
+     * @return Crud
      */
     public function addRelation($tableLeft, $colJoinLeft, $tableRight, $colJoinRight)
     {
@@ -96,12 +96,14 @@ class Crud
             'c_join_left'  => $colJoinLeft,
             'c_join_right' => $colJoinRight
         );
+        
+        return $this;
     }
     
     /**
      * Permet de vouloir récupérer toutes les colonnes afin de toutes les afficher
      * 
-     * @return bool
+     * @return bool|Crud
      */
     public function setDisplayAllColumns()
     {
@@ -119,7 +121,7 @@ class Crud
             $this->setDisplayColumn($colName, $param);
         }
         
-        return true;
+        return $this;
     }
     
     /**
@@ -128,7 +130,7 @@ class Crud
      * @param string $colName
      * @param array  $params
      * 
-     * @return bool
+     * @return bool|Crud
      */
     public function setDisplayColumn($colName, $params=array())
     {
@@ -142,7 +144,7 @@ class Crud
             'disabled' => $disabled
         );
         
-        return true;
+        return $this;
     }
     
     /**
