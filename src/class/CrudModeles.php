@@ -209,4 +209,22 @@ class CrudModeles extends Modeles
             return false;
         }
     }
+    
+    public function getDatas($sqlQuery)
+    {
+        try {$res = $sqlQuery->fetchAll();}
+        catch(Exception $e)
+        {
+            echo '<pre>'.$e.'</pre><br/><br/>';
+            return false;
+        }
+        
+            if($res) {return $res;}
+        elseif(!$res && $req->nb_result() === 0) {return array();}
+        else
+        {
+            throw new Exception('Erreur durant la récupération des données.');
+            return false;
+        }
+    }
 }

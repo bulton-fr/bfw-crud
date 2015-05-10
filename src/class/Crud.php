@@ -90,13 +90,14 @@ class Crud
      * 
      * @return Crud
      */
-    public function addRelation($tableLeft, $colJoinLeft, $tableRight, $colJoinRight)
+    public function addRelation($tableLeft, $colJoinLeft, $tableRight, $colJoinRight, $colRightValue)
     {
         $this->relation[] = array(
             't_left'       => $tableLeft,
             't_right'      => $tableRight,
             'c_join_left'  => $colJoinLeft,
-            'c_join_right' => $colJoinRight
+            'c_join_right' => $colJoinRight,
+            'c_col_value'  => $colRightValue
         );
         
         return $this;
@@ -143,7 +144,8 @@ class Crud
         
         $this->columns[$colName] = array(
             'name'     => $colName,
-            'disabled' => $disabled
+            'disabled' => $disabled,
+            'label'    => ''
         );
         
         return $this;
@@ -170,8 +172,7 @@ class Crud
             $columnsName[] = $colInfo['name'];
         }
         
-        $query = $this->sql->select()
-                           ->from($this->table, $columnsName);
+        $query = $this->sql->select();
         
         if($order !== '')      {$query->order($order);}
         if($limit !== array()) {$query->limit($limit);}
@@ -182,24 +183,42 @@ class Crud
             {
                 $on = $relation['t_left'].'.'.$relation['c_join_left'].'='
                       .$relation['t_right'].'.'.$relation['c_join_right'];
-                      
-                $query->joinLeft($relation['t_right'], $on, array($relation['c_join_right']));
+                
+                $query->joinLeft($relation['t_right'], $on, array($relation['c_col_value']));
+                $this->setDisplayColumn($relation['c_join_left']);
+                
+                $columnsName[] = $relation['c_join_left'];
             }
         }
         
-        $datas = $this->sql->getAll($query);
-        $normalizeDatas = array();
+        $query->from($this->table, $columnsName);
+        $datas = $this->sql->getDatas($query);
         
+        $normalizeDatas = array();
         foreach($datas as $lignes)
         {
-            $data = array();
+            $data        = array();
+            $relationAdd = array();
             
             foreach($lignes as $colName => $value)
             {
+                if(!isset($this->columns[$colName]))
+                {
+                    $relationAdd[$colName] = $value;
+                    continue;
+                }
+                
                 $dataLine = $this->columns[$colName];
                 $dataLine['value'] = $value;
+                $dataLine['label'] = $value;
                 
-                $data[] = $dataLine;
+                $data[$colName] = $dataLine;
+            }
+            
+            foreach($this->relation as $relation)
+            {
+                $data[$relation['c_join_left']]['label'] = 
+                    $relationAdd[$relation['c_col_value']];
             }
             
             $normalizeDatas[] = $data;
