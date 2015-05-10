@@ -1,11 +1,7 @@
-bfw-savant3
+bfw-crud
 ===========
 
-Module for use the Savant3 library with BFW framework
-
-[![Dependency Status](https://www.versioneye.com/user/projects/54615af1a23e4120dd000053/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54615af1a23e4120dd000053)
-[![Latest Stable Version](https://poser.pugx.org/bulton-fr/bfw-savant3/v/stable.svg)](https://packagist.org/packages/bulton-fr/bfw-savant3) [![Latest Unstable Version](https://poser.pugx.org/bulton-fr/bfw-savant3/v/unstable.svg)](https://packagist.org/packages/bulton-fr/bfw-savant3) [![License](https://poser.pugx.org/bulton-fr/bfw-savant3/license.svg)](https://packagist.org/packages/bulton-fr/bfw-savant3)
-
+Module for create a crud with BFW framework
 
 ---
 
