@@ -27,5 +27,12 @@
         "bulton-fr/bfw-api": "~1.0",
         "bulton-fr/bfw-sql" : "~1.0"
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "stable",
+    "autoload":
+    {
+        "psr-4":
+        {
+            "BFWCrud\\": "src/class/"
+        }
+    }
 }
