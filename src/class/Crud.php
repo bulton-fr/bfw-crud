@@ -141,7 +141,7 @@ class Crud
         $disabled = false;
         if(isset($params['disabled'])) {$disabled = $params['disabled'];}
         
-        $this->columns[] = array(
+        $this->columns[$colName] = array(
             'name'     => $colName,
             'disabled' => $disabled
         );
